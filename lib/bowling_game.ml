@@ -1,1 +1,1 @@
-let score _ = -1
+let score _ = 0
