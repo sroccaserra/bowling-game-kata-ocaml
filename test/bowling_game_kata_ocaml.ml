@@ -2,7 +2,8 @@ open OUnit2
 open Bowling_game_kata.Bowling_game
 
 let test_gutter_game _ =
-    let rolls = [0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0; 0] in
+    let always n _ = n in
+    let rolls = List.init 20 @@ always 0 in
     assert_equal ~printer: string_of_int 0 (score rolls)
 
 let suite =
