@@ -1,0 +1,4 @@
+(executable
+ (public_name bowling_game_kata_ocaml)
+ (name main)
+ (libraries bowling_game_kata_ocaml))

@@ -1,0 +1,3 @@
+(test
+ (name bowling_game_kata_ocaml)
+ (libraries ounit2 bowling_game))
