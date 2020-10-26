@@ -16,6 +16,9 @@ $ OUNIT_CI=true dune runtest -w
 - <https://dune.readthedocs.io/en/stable/usage.html>
 - <https://dune.readthedocs.io/en/latest/tests.html>
 - <https://dune.readthedocs.io/en/stable/dune-files.html>
+- <https://github.com/janestreet/ppx_assert>
+- <https://github.com/janestreet/ppx_expect>
+- <https://github.com/janestreet/ppx_inline_test>
 - <https://gildor478.github.io/ounit/ounit2/index.html>
 - <https://github.com/mirage/alcotest>
 - <https://github.com/mirage/alcotest/tree/15cc308/examples>
