@@ -1,9 +1,8 @@
 let frame_score n_1 n_2 =
   let sum = n_1 + n_2 in
-  if sum == 10 then
-    sum + 1
-  else
-    sum
+  match sum with
+  | 10 -> 11
+  | n -> n
 
 let rec score ?sum rolls =
   match sum with
