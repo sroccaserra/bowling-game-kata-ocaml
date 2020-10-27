@@ -27,4 +27,9 @@ let () = run_test_tt_main ("Bowling Game" >::: [
     let rolls = 0::0::3::7::1::(List.init 15 @@ const 0) in
     let result = score rolls in
     assert_equal ~printer:string_of_int 12 result);
+
+  "A spare with a bonus of 2" >:: (fun _ ->
+    let rolls = 0::0::3::7::2::(List.init 15 @@ const 0) in
+    let result = score rolls in
+    assert_equal ~printer:string_of_int 14 result);
 ])
