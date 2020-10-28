@@ -48,5 +48,15 @@ let () = run_test_tt_main ("Bowling Game" >::: [
       let rolls = rolls_with ~nb_pins:0 ~times:18 @ [10; 1; 1] in
       let result = score rolls in
       assert_equal ~printer:string_of_int 12 result);
+
+    "in ninth frame with a bonus of 2 scores 14" >:: (fun _ ->
+      let rolls = rolls_with ~nb_pins:0 ~times:16 @ [10; 1; 1] in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 14 result);
+
+    "in all frames scores a perfect score of 300" >:: (fun _ ->
+      let rolls = rolls_with ~nb_pins: 10 ~times:12 in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 300 result);
   ]);
 ]);
