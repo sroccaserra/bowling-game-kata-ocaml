@@ -5,6 +5,11 @@ To run tests on file change:
 ```
 $ OUNIT_CI=true dune runtest -w
 ```
+## Outils OCaml
+
+- <https://github.com/ocaml/merlin/wiki/vim-from-scratch>
+- <https://github.com/ocaml-community/utop>
+- <https://github.com/ocaml/ocaml-lsp>
 
 ## References
 
