@@ -9,7 +9,8 @@ let frame_score n_1 n_2 n_3 =
 
 let rec score = function
   | [] -> 0
-  | n_1::n_2::[] -> n_1 + n_2
-  | 10::n_2::n_3::rest -> frame_score 10 n_2 n_3 + score(n_2::n_3::rest)
-  | n_1::n_2::n_3::rest -> frame_score n_1 n_2 n_3 + score (n_3::rest)
+  | n_1 :: n_2 :: [] -> n_1 + n_2
+  | 10 :: n_2 :: n_3 :: [] -> frame_score 10 n_2 n_3 + score []
+  | 10 :: n_2 :: n_3 :: rest -> frame_score 10 n_2 n_3 + score ([n_2; n_3] @ rest)
+  | n_1 :: n_2 :: n_3 :: rest -> frame_score n_1 n_2 n_3 + score (n_3 :: rest)
   | _ -> failwith "missing arguments"

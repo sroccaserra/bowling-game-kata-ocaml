@@ -21,23 +21,32 @@ let () = run_test_tt_main ("Bowling Game" >::: [
     let result = score rolls in
     assert_equal ~printer:string_of_int 5 result);
 
-  "A spare as first result with a bonus of 1" >:: (fun _ ->
-    let rolls = [3; 7; 1] @ rolls_with ~nb_pins:0 ~times:17 in
-    let result = score rolls in
-    assert_equal ~printer:string_of_int 12 result);
+  ("A spare" >::: [
+    "in first frame with a bonus of 1 scores 12" >:: (fun _ ->
+      let rolls = [3; 7; 1] @ rolls_with ~nb_pins:0 ~times:17 in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 12 result);
 
-  "A spare as second result" >:: (fun _ ->
-    let rolls = [0; 0; 3; 7; 1] @ rolls_with ~nb_pins:0 ~times:15 in
-    let result = score rolls in
-    assert_equal ~printer:string_of_int 12 result);
+    "in second frame with a bonus of 1 scores 12" >:: (fun _ ->
+      let rolls = [0; 0; 3; 7; 1] @ rolls_with ~nb_pins:0 ~times:15 in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 12 result);
 
-  "A spare with a bonus of 2" >:: (fun _ ->
-    let rolls = [0; 0; 3; 7; 2] @ rolls_with ~nb_pins:0 ~times:15 in
-    let result = score rolls in
-    assert_equal ~printer:string_of_int 14 result);
+    "with a bonus of 2 scores 14" >:: (fun _ ->
+      let rolls = [0; 0; 3; 7; 2] @ rolls_with ~nb_pins:0 ~times:15 in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 14 result);
+  ]);
 
-  "A strike with a bonus of 2 scores 14" >:: (fun _ ->
-    let rolls = [10; 1; 1] @ rolls_with ~nb_pins:0 ~times:16 in
-    let result = score rolls in
-    assert_equal ~printer:string_of_int 14 result);
-])
+  ("A strike" >::: [
+    "with a bonus of 2 scores 14" >:: (fun _ ->
+      let rolls = [10; 1; 1] @ rolls_with ~nb_pins:0 ~times:16 in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 14 result);
+
+    "in last frame with a bonus of 2 scores 12" >:: (fun _ ->
+      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [10; 1; 1] in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 12 result);
+  ]);
+]);
