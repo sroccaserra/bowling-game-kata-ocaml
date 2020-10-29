@@ -12,9 +12,9 @@ let rec score ?(frame_number = 1) rolls =
   match rolls with
   | [] -> 0
   | [_] -> 0
-  | n_1 :: n_2 :: [] when frame_number = 10 -> n_1 + n_2
-  | _ :: _ :: [] -> 0
+  | [n_1; n_2] when frame_number = 10 -> n_1 + n_2
+  | [_; _] -> 0
   | 10 :: n_2 :: n_3 :: rest ->
-      frame_score 10 n_2 n_3 + score ~frame_number:next_frame_number ([n_2; n_3] @ rest)
+      frame_score 10 n_2 n_3 + score ~frame_number:next_frame_number (n_2 :: n_3 :: rest)
   | n_1 :: n_2 :: n_3 :: rest ->
       frame_score n_1 n_2 n_3 + score ~frame_number:next_frame_number (n_3 :: rest)
