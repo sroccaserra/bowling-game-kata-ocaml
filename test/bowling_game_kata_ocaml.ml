@@ -36,6 +36,11 @@ let () = run_test_tt_main ("Bowling Game" >::: [
       let rolls = [0; 0; 3; 7; 2] @ rolls_with ~nb_pins:0 ~times:15 in
       let result = score rolls in
       assert_equal ~printer:string_of_int 14 result);
+
+    "in last frame scores 11" >:: (fun _ ->
+      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [3; 7; 1] in
+      let result = score rolls in
+      assert_equal ~printer:string_of_int 11 result);
   ]);
 
   ("A strike" >::: [
