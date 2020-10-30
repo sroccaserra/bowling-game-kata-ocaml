@@ -8,5 +8,5 @@ let rec score ?(n = 1) rolls =
     10 + y + z + score ~n:(succ n) (y :: z :: rest)
   | x :: y :: z :: rest when x + y = 10 ->
     10 + z + score ~n:(succ n) (z :: rest)
-  | x :: y :: z :: rest ->
-     x + y + score ~n:(succ n) (z :: rest)
+  | x :: y :: rest ->
+     x + y + score ~n:(succ n) rest
