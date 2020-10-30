@@ -9,7 +9,6 @@ let is_last_frame =
 
 let rec score ?(n = 1) = function
   | [] -> 0
-  | [_] -> failwith "wrong number of rolls"
   | [x; y; z] when is_last_frame n ->
       x + y + z
   | x :: y :: z :: rest when is_strike x ->
@@ -18,3 +17,4 @@ let rec score ?(n = 1) = function
       10 + z + score ~n:(succ n) (z :: rest)
   | x :: y :: rest ->
       x + y + score ~n:(succ n) rest
+  | [_] -> failwith "wrong number of rolls"
