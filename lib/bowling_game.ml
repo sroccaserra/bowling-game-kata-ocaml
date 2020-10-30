@@ -1,5 +1,4 @@
-let rec score ?(n = 1) rolls =
-  match rolls with
+let rec score ?(n = 1) = function
   | [] -> 0
   | [_] -> failwith "wrong number of rolls"
   | [x; y; z] when n = 10 -> x + y + z
