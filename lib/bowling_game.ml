@@ -1,4 +1,4 @@
-let rec score ?(n: int = 1) (xs: int list): int =
+let rec score ?(n:int=1) (xs:int list) : int =
   let n' = succ n in
   match xs with
   | [] -> 0
