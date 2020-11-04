@@ -3,7 +3,7 @@ open OUnit2
 open Bowling_game_kata.Bowling_game
 
 let rolls_with ~nb_pins ~times =
-  List.init times @@ const nb_pins
+  List.init times @@ const @@ Roll nb_pins
 
 let () = run_test_tt_main ("Bowling Game" >::: [
   "A gutter game has a score of zero" >:: (fun _ ->
@@ -17,45 +17,45 @@ let () = run_test_tt_main ("Bowling Game" >::: [
     assert_equal ~printer:string_of_int 20 result);
 
   "A game with a 5 and all zeroes rolls has a score of 5" >:: (fun _ ->
-    let rolls = 5 :: rolls_with ~nb_pins:0 ~times:19 in
+    let rolls = Roll 5 :: rolls_with ~nb_pins:0 ~times:19 in
     let result = score rolls in
     assert_equal ~printer:string_of_int 5 result);
 
   ("A spare" >::: [
     "in first frame with a bonus of 1 scores 12" >:: (fun _ ->
-      let rolls = [3; 7; 1] @ rolls_with ~nb_pins:0 ~times:17 in
+      let rolls = [Roll 3; Roll 7; Roll 1] @ rolls_with ~nb_pins:0 ~times:17 in
       let result = score rolls in
       assert_equal ~printer:string_of_int 12 result);
 
     "in second frame with a bonus of 1 scores 12" >:: (fun _ ->
-      let rolls = [0; 0; 3; 7; 1] @ rolls_with ~nb_pins:0 ~times:15 in
+      let rolls = [Roll 0; Roll 0; Roll 3; Roll 7; Roll 1] @ rolls_with ~nb_pins:0 ~times:15 in
       let result = score rolls in
       assert_equal ~printer:string_of_int 12 result);
 
     "with a bonus of 2 scores 14" >:: (fun _ ->
-      let rolls = [0; 0; 3; 7; 2] @ rolls_with ~nb_pins:0 ~times:15 in
+      let rolls = [Roll 0; Roll 0; Roll 3; Roll 7; Roll 2] @ rolls_with ~nb_pins:0 ~times:15 in
       let result = score rolls in
       assert_equal ~printer:string_of_int 14 result);
 
     "in last frame scores 11" >:: (fun _ ->
-      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [3; 7; 1] in
+      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [Roll 3; Roll 7; Roll 1] in
       let result = score rolls in
       assert_equal ~printer:string_of_int 11 result);
   ]);
 
   ("A strike" >::: [
     "with a bonus of 2 scores 14" >:: (fun _ ->
-      let rolls = [10; 1; 1] @ rolls_with ~nb_pins:0 ~times:16 in
+      let rolls = [Roll 10; Roll 1; Roll 1] @ rolls_with ~nb_pins:0 ~times:16 in
       let result = score rolls in
       assert_equal ~printer:string_of_int 14 result);
 
     "in last frame with a bonus of 2 scores 12" >:: (fun _ ->
-      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [10; 1; 1] in
+      let rolls = rolls_with ~nb_pins:0 ~times:18 @ [Roll 10; Roll 1; Roll 1] in
       let result = score rolls in
       assert_equal ~printer:string_of_int 12 result);
 
     "in ninth frame with a bonus of 2 scores 14" >:: (fun _ ->
-      let rolls = rolls_with ~nb_pins:0 ~times:16 @ [10; 1; 1] in
+      let rolls = rolls_with ~nb_pins:0 ~times:16 @ [Roll 10; Roll 1; Roll 1] in
       let result = score rolls in
       assert_equal ~printer:string_of_int 14 result);
 

@@ -1,14 +1,16 @@
-let rec score ?(n:int=1) (xs:int list) : int =
+type roll = Roll of int
+
+let rec score ?(n:int=1) (xs:roll list) : int =
   let n' = succ n in
   match xs with
   | [] -> 0
-  | [x; y; z] when is_last_frame n ->
+  | [Roll x; Roll y; Roll z] when is_last_frame n ->
       x + y + z
-  | x :: y :: z :: rest when is_strike x ->
-      10 + y + z + score ~n:n' (y :: z :: rest)
-  | x :: y :: z :: rest when is_spare x y  ->
-      10 + z + score ~n:n' (z :: rest)
-  | x :: y :: rest ->
+  | Roll x :: Roll y :: Roll z :: rest when is_strike x ->
+      10 + y + z + score ~n:n' (Roll y :: Roll z :: rest)
+  | Roll x :: Roll y :: Roll z :: rest when is_spare x y  ->
+      10 + z + score ~n:n' (Roll z :: rest)
+  | Roll x :: Roll y :: rest ->
       x + y + score ~n:n' rest
   | [_] -> failwith "wrong number of rolls"
 and is_strike = (==) 10
