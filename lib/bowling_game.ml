@@ -1,18 +1,21 @@
 type roll = Roll of int
 
-let rec score ?(n:int=1) (xs:roll list) : int =
-  let n' = succ n in
+type frame = Frame of int
+let next (Frame n) = Frame (n + 1)
+
+let rec score ?(f:frame=Frame 1) (xs:roll list) : int =
+  let f' = next f in
   match xs with
   | [] -> 0
-  | [Roll x; Roll y; Roll z] when is_last_frame n ->
+  | [Roll x; Roll y; Roll z] when is_last_frame f ->
       x + y + z
   | Roll x :: Roll y :: Roll z :: rest when is_strike x ->
-      10 + y + z + score ~n:n' (Roll y :: Roll z :: rest)
+      10 + y + z + score ~f:f' (Roll y :: Roll z :: rest)
   | Roll x :: Roll y :: Roll z :: rest when is_spare x y  ->
-      10 + z + score ~n:n' (Roll z :: rest)
+      10 + z + score ~f:f' (Roll z :: rest)
   | Roll x :: Roll y :: rest ->
-      x + y + score ~n:n' rest
+      x + y + score ~f:f' rest
   | [_] -> failwith "wrong number of rolls"
 and is_strike = (==) 10
 and is_spare x y = x + y == 10
-and is_last_frame = (==) 10
+and is_last_frame (Frame n) = n == 10
